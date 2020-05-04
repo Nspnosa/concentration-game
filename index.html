@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="winnerDiv">
+        <p style="padding-top: 20px;padding-bottom: 20px;">PlayerX wins</p>
+    </div>
+    <div id="info_container">
+        <div id="infoCard1">
+            <p>Player 1</p>
+            <p id="score_1">0</p>
+        </div>
+        <div id="infoCard2">
+            <p>Player 2</p>
+            <p id="score_2">0</p>
+        </div>
+    </div>
+    <div id="main_container">
+        <!-- <div class="card">
+            <p>🎃</p>
+        </div> -->
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    const EMOJIS = [
+        '😄', '😃', '😀', '😊', '☺', '😉', '😍', '😘', '😚', '😗', '😙', '😜', '😝', '😛', '😳', '😁', '😔', '😌', '😒', '😞', '😣', '😢', '😂', '😭', '😪', '😥', '😰', '😅', '😓', '😩', '😫', '😨', '😱', '😠', '😡', '😤', '😖', '😆', '😋', '😷', '😎', '😴', '😵', '😲', '😟', '😦', '😧', '😈', '👿', '😮', '😬', '😐', '😕', '😯', '😶', '😇', '😏', '😑', '👲', '👳', '👮', '👷', '💂', '👶', '👦', '👧', '👨', '👩', '👴', '👵', '👱', '👼', '👸', '😺', '😸', '😻', '😽', '😼', '🙀', '😿', '😹', '😾', '👹', '👺', '🙈', '🙉', '🙊', '💀', '👽', '💩', '🔥', '✨', '🌟', '💫', '💥', '💢', '💦', '💧', '💤', '💨', '👂', '👀', '👃', '👅', '👄', '👍', '👎', '👌', '👊', '✊', '✌', '👋', '✋', '👐', '👆', '👇', '👉', '👈', '🙌', '🙏', '☝', '👏', '💪', '🚶', '🏃', '💃', '👫', '👪', '👬', '👭', '💏', '💑', '👯', '🙆', '🙅', '💁', '🙋', '💆', '💇', '💅', '👰', '🙎', '🙍', '🙇', '🎩', '👑', '👒', '👟', '👞', '👡', '👠', '👢', '👕', '👔', '👚', '👗', '🎽', '👖', '👘', '👙', '💼', '👜', '👝', '👛', '👓', '🎀', '🌂', '💄', '💛', '💙', '💜', '💚', '❤', '💔', '💗', '💓', '💕', '💖', '💞', '💘', '💌', '💋', '💍', '💎', '👤', '👥', '💬', '👣', '💭', '🐶', '🐺', '🐱', '🐭', '🐹', '🐰', '🐸', '🐯', '🐨', '🐻', '🐷', '🐽', '🐮', '🐗', '🐵', '🐒', '🐴', '🐑', '🐘', '🐼', '🐧', '🐦', '🐤', '🐥', '🐣', '🐔', '🐍', '🐢', '🐛', '🐝', '🐜', '🐞', '🐌', '🐙', '🐚', '🐠', '🐟', '🐬', '🐳', '🐋', '🐄', '🐏', '🐀', '🐃', '🐅', '🐇', '🐉', '🐎', '🐐', '🐓', '🐕', '🐖', '🐁', '🐂', '🐲', '🐡', '🐊', '🐫', '🐪', '🐆', '🐈', '🐩', '🐾', '💐', '🌸', '🌷', '🍀', '🌹', '🌻', '🌺', '🍁', '🍃', '🍂', '🌿', '🌾', '🍄', '🌵', '🌴', '🌲', '🌳', '🌰', '🌱', '🌼', '🌐', '🌞', '🌝', '🌚', '🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘', '🌜', '🌛', '🌙', '🌍', '🌎', '🌏', '🌋', '🌌', '🌠', '⭐', '☀', '⛅', '☁', '⚡', '☔', '❄', '⛄', '🌀', '🌁', '🌈', '🌊', '🎍', '💝', '🎎', '🎒', '🎓', '🎏', '🎆', '🎇', '🎐', '🎑', '🎃', '👻', '🎅', '🎄', '🎁', '🎋', '🎉', '🎊', '🎈', '🎌', '🔮', '🎥', '📷', '📹', '📼', '💿', '📀', '💽', '💾', '💻', '📱', '☎', '📞', '📟', '📠', '📡', '📺', '📻', '🔊', '🔉', '🔈', '🔇', '🔔', '🔕', '📢', '📣', '⏳', '⌛', '⏰', '⌚', '🔓', '🔒', '🔏', '🔐', '🔑', '🔎', '💡', '🔦', '🔆', '🔅', '🔌', '🔋', '🔍', '🛁', '🛀', '🚿', '🚽', '🔧', '🔩', '🔨', '🚪', '🚬', '💣', '🔫', '🔪', '💊', '💉', '💰', '💴', '💵', '💷', '💶', '💳', '💸', '📲', '📧', '📥', '📤', '✉', '📩', '📨', '📯', '📫', '📪', '📬', '📭', '📮', '📦', '📝', '📄', '📃', '📑', '📊', '📈', '📉', '📜', '📋', '📅', '📆', '📇', '📁', '📂', '✂', '📌', '📎', '✒', '✏', '📏', '📐', '📕', '📗', '📘', '📙', '📓', '📔', '📒', '📚', '📖', '🔖', '📛', '🔬', '🔭', '📰', '🎨', '🎬', '🎤', '🎧', '🎼', '🎵', '🎶', '🎹', '🎻', '🎺', '🎷', '🎸', '👾', '🎮', '🃏', '🎴', '🀄', '🎲', '🎯', '🏈', '🏀', '⚽', '⚾', '🎾', '🎱', '🏉', '🎳', '⛳', '🚵', '🚴', '🏁', '🏇', '🏆', '🎿', '🏂', '🏊', '🏄', '🎣', '☕', '🍵', '🍶', '🍼', '🍺', '🍻', '🍸', '🍹', '🍷', '🍴', '🍕', '🍔', '🍟', '🍗', '🍖', '🍝', '🍛', '🍤', '🍱', '🍣', '🍥', '🍙', '🍘', '🍚', '🍜', '🍲', '🍢', '🍡', '🍳', '🍞', '🍩', '🍮', '🍦', '🍨', '🍧', '🎂', '🍰', '🍪', '🍫', '🍬', '🍭', '🍯', '🍎', '🍏', '🍊', '🍋', '🍒', '🍇', '🍉', '🍓', '🍑', '🍈', '🍌', '🍐', '🍍', '🍠', '🍆', '🍅', '🌽', '🏠', '🏡', '🏫', '🏢', '🏣', '🏥', '🏦', '🏪', '🏩', '🏨', '💒', '⛪', '🏬', '🏤', '🌇', '🌆', '🏯', '🏰', '⛺', '🏭', '🗼', '🗾', '🗻', '🌄', '🌅', '🌃', '🗽', '🌉', '🎠', '🎡', '⛲', '🎢', '🚢', '⛵', '🚤', '🚣', '⚓', '🚀', '✈', '💺', '🚁', '🚂', '🚊', '🚉', '🚞', '🚆', '🚄', '🚅', '🚈', '🚇', '🚝', '🚋', '🚃', '🚎', '🚌', '🚍', '🚙', '🚘', '🚗', '🚕', '🚖', '🚛', '🚚', '🚨', '🚓', '🚔', '🚒', '🚑', '🚐', '🚲', '🚡', '🚟', '🚠', '🚜', '💈', '🚏', '🎫', '🚦', '🚥', '⚠', '🚧', '🔰', '⛽', '🏮', '🎰', '♨', '🗿', '🎪', '🎭', '📍', '🚩'];
+
+
+
+    let cardCount = 0;
+    const MAXCARDCOUNT = 24;
+    let clickCntr = 0;
+    let player = 1;
+    let repeatPlayer = false;
+    let removedCards = 0;
+    //while (isNaN(cardCount = Number(prompt("how many cards"))) || cardCount == 0);
+    /*cardCount = Math.floor(Math.random() * 25);
+    if ((cardCount % 2)) {
+        cardCount++;
+    }
+    cardCount = cardCount > MAXCARDCOUNT ? MAXCARDCOUNT : cardCount;
+    cardCount = cardCount == 0 ? MAXCARDCOUNT : cardCount*/
+    cardCount = 18;
+    function generateEmoji() {
+        return EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+    }
+
+    function createCard(text) {
+        let mainNewDiv = document.createElement('div');
+        let newDiv = document.createElement('div');
+        let newP = document.createElement('p');
+        newP.className = 'emojiP';
+        newDiv.className = 'card';
+        mainNewDiv.className = 'mainCardDiv';
+        newP.textContent = text;
+        newP.style.display = 'none';
+        newDiv.appendChild(newP);
+        mainNewDiv.appendChild(newDiv);
+        return mainNewDiv;
+    }
+
+    function createCardsShuffled() {
+        let cards = [];//document.getElementsByClassName('card');
+
+        for (let i = 0; i < cardCount / 2; i++) {
+            let emoji = generateEmoji();
+            cards.push(createCard(emoji));
+            cards.push(createCard(emoji));
+        }
+
+        let cardArray = [];
+        for (let i = 0; i < cards.length; i++) {
+            let random = 0;
+            do {
+                random = Math.floor(Math.random() * cards.length);
+            }
+            while (cardArray.includes(random));
+            cardArray.push(random);
+            /*cards[random].style.display = 'none'*/;
+            document.getElementById('main_container').appendChild(cards[random]);
+        }
+    }
+    createCardsShuffled();
+
+    let timeOutID;
+    let selectedCards = [];
+
+    let mainContainer = document.getElementById('main_container');
+    mainContainer.addEventListener("mousedown", event => {
+        if ((event.target.className == 'card') && (clickCntr < 2)) {
+            if (event.button == 0) {
+
+                if (event.target.children[0].style.display != 'none') {
+                    return;
+                }
+
+                clickCntr++;
+                selectedCards.push(event.target);
+                event.target.children[0].style.display = 'block';
+                console.log("Left button");
+                console.log(event.target);
+                clearTimeout(timeOutID);
+            }
+        }
+        timeOutID = setTimeout(() => {
+            if (clickCntr >= 2) {
+                repeatPlayer = false;
+                if (selectedCards[0].children[0].textContent == selectedCards[1].children[0].textContent) {
+                    selectedCards[0].style.display = 'none';
+                    selectedCards[1].style.display = 'none';
+                    let scoreP = document.getElementById('score_' + player);
+                    scoreP.textContent = (Number(scoreP.textContent) + 2);
+
+                    repeatPlayer = true;
+                    removedCards += 2;
+                    if (removedCards == cardCount) {
+                        let scoreP1 = Number(document.getElementById('score_1').textContent);
+                        let scoreP2 = Number(document.getElementById('score_2').textContent);
+
+                        document.getElementById("winnerDiv").style.display = 'block';
+                        document.getElementById("winnerDiv").children[0].textContent = scoreP1 > scoreP2 ? 'Player 1 wins' : 'Player 2 wins';
+                    }
+                }
+
+                selectedCards = [];
+                clickCntr = 0;
+                let para = document.getElementsByClassName('emojiP');
+                for (let i = 0; i < para.length; i++) {
+                    para[i].style.display = 'none';
+                }
+                if (repeatPlayer == false) {
+                    document.getElementById('infoCard' + player).style.border = '1px solid black'; //deselect
+                    player = player == 1 ? 2 : 1;
+                    document.getElementById('infoCard' + player).style.border = '5px solid red'; //select
+                }
+
+            }
+        }, 1000)
+    });
+
+</script>
